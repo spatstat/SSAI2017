@@ -1,8 +1,8 @@
-# AAU2015
+# SSAI2017 
 
 This repository contains source files for the course material for the
-spatstat workshop at Aalborg University.
+SSAI spatstat workshop at University of Western Australia.
 
 See the course website for the actual course material:
 
-http://spatstat.github.io/AAU2015/
+http://spatstat.github.io/SSAI2017/
