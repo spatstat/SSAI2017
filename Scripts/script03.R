@@ -1,10 +1,10 @@
-#'      Workshop on analysing spatial point patterns with spatstat
-#'                   Aalborg, April 2015
+#'      SSAI course on spatial point patterns with spatstat
+#'                     Perth, May 2017
 #' 
 #'                   Lecturer's R script 
 #'                  Session 3: Intensity dependent on a covariate
 #' 
-#'         Copyright (c) Adrian Baddeley and Ege Rubak 2015
+#'         Copyright (c) Adrian Baddeley and Ege Rubak 2017
 #'
 library(spatstat)
 
@@ -59,5 +59,3 @@ plot(bt2)
 
 plot(roc(copP, copD))
 plot(roc(murX, murD, high=FALSE))
-#' ROC plot [development version of spatstat]
-

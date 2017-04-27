@@ -1,10 +1,10 @@
-#'      Workshop on analysing spatial point patterns with spatstat
-#'                   Aalborg, April 2015
+#'      SSAI course on spatial point patterns with spatstat
+#'                     Perth, May 2017
 #' 
 #'                   Lecturer's R script 
 #'                  Session 2: Inhomogeneous Intensity
 #' 
-#'         Copyright (c) Adrian Baddeley and Ege Rubak 2015
+#'         Copyright (c) Adrian Baddeley and Ege Rubak 2017
 #' 
 library(spatstat)
 plot(swedishpines)

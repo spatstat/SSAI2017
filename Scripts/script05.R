@@ -1,10 +1,10 @@
-#'      Workshop on analysing spatial point patterns with spatstat
-#'                   Aalborg, April 2015
+#'      SSAI course on spatial point patterns with spatstat
+#'                     Perth, May 2017
 #' 
 #'                   Lecturer's R script 
 #'                  Session 5: Marked point patterns
 #' 
-#'         Copyright (c) Adrian Baddeley and Ege Rubak 2015
+#'         Copyright (c) Adrian Baddeley and Ege Rubak 2017
 #' 
 options(width=130) #' stretch window to widest
 library(spatstat)
