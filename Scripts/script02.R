@@ -60,6 +60,7 @@ bw.diggle(bei)
 bop <- bw.diggle(bei)
 bop
 plot(bop)
+plot(bop, xlim = c(1.5, 5))
 plot(density(bei, sigma=bw.scott(bei)))
 plot(density(bei, sigma=bw.scott))
 plot(density(bei, sigma=bw.diggle))
