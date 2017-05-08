@@ -62,4 +62,4 @@ bop
 plot(bop)
 plot(density(bei, sigma=bw.scott(bei)))
 plot(density(bei, sigma=bw.scott))
-
+plot(density(bei, sigma=bw.diggle))

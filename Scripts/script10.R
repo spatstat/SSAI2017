@@ -33,14 +33,16 @@ plot(Kinhom(swedishpines, sigma=bw.scott))
 fitS <- ppm(swedishpines ~ polynom(x,y,2), Strauss(9))
 anova(fitP, fitS, test="LR")
 
-plot(predict(fitS, type="cif"))
+plot(predict(fitS, type="cif", ngrid = 256))
 plot(swedishpines, add=TRUE, cols="white", pch=16)
-
 plot(intensity(fitS))
-plot(simulate(fitS, nsim=10))
+plot(simulate(fitS, nsim=9))
 
 step(fitS)
 
 plot(leverage(fitS))
-plot(influence(fitS))
+points(swedishpines, col = "white")
 plot(dfbetas(fitS), nrows=3)
+#' The result of `dfbetas` can be unwieldy.
+#' Boiled down to one (likelihood based) value by `influence`
+plot(influence(fitS))

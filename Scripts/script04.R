@@ -24,6 +24,7 @@ coef(m)
 simulate(m)
 #'
 lam <- function(x,y) { 400 * exp(-2*(x + y)) }
+plot(funxy(lam, W = owin()))
 plot(Y <- rpoispp(lam))
 plot(rpoispp(lam, nsim=20), main.panel="", mar.panel=1, pch=16)
 #' [Inhomogeneous Poisson process is completely specified by
@@ -43,6 +44,8 @@ L <- rescale(L, 1000, unitname="km")
 plot(X, main="Murchison gold data", chars=16, cex=0.6, cols="blue")
 plot(L, add=TRUE, col="red")
 D <- distfun(L)
+plot(D)
+plot(L, add=TRUE, col="white")
 
 fitD <- ppm(X ~ D)
 fitD
@@ -59,6 +62,10 @@ fit0 <- ppm(X ~ 1)
 fit0
 anova(fit0, fitD, test="LR")
 
+#' Using the `data` argument of ppm (recommended)
+murch <- solist(gold = X, faultdist = D)
+ppm(gold ~ faultdist, data = murch)
+
 #'
 copP <- rotate(copper$SouthPoints, pi/2)
 copL <- rotate(copper$SouthLines, pi/2)
@@ -74,4 +81,3 @@ anova(cf0, cfD, test="LR")
 cfD3 <- ppm(copP ~ polynom(copD, 3))
 cfD3
 step(cfD3)
-
