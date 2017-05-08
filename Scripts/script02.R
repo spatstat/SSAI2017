@@ -27,7 +27,7 @@ quadrat.test(swp, 3, 3)
 
 b4 <- quadrat.test(bei, 4, 2)
 b4
-plot(bei, chars=".")
+plot(bei, chars=".", cols = "black")
 plot(b4, add=TRUE, col="blue")
 #' test result can also be plotted
 
