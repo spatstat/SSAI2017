@@ -87,25 +87,19 @@ process model using a different model formula.
 The `bei` dataset gives the locations of trees in a survey area
 with additional covariate information in a list `bei.extra`.
 
-1.  Assign both terrain elevation and slope (gradient) sensible names
-    ```{r}
-    elev <- bei.extra$elev
-    grad <- bei.extra$grad
-    ```
-
-2.  Fit a Poisson point process model to the data which assumes
+1.  Fit a Poisson point process model to the data which assumes
     that the intensity is a loglinear function of terrain slope
-    and elevation
+    and elevation (hint: use `data = bei.extra` in `ppm`).
 
-3.  Read off the fitted coefficients and write down the fitted
+2.  Read off the fitted coefficients and write down the fitted
     intensity function.
 
-4.  Plot the fitted intensity as a colour image.
+3.  Plot the fitted intensity as a colour image.
 
-5.  extract the estimated variance-covariance matrix of the
+4.  extract the estimated variance-covariance matrix of the
     coefficient estimates, using `vcov`.
 
-6.  Compute and plot the standard error of the intensity estimate
+5.  Compute and plot the standard error of the intensity estimate
     (see `help(predict.ppm)`).
 
 
