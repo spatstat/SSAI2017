@@ -5,4 +5,4 @@ SSAI spatstat workshop at University of Western Australia.
 
 See the course website for the actual course material:
 
-http://spatstat.github.io/SSAI2017/
+http://spatstat.org/SSAI2017/
