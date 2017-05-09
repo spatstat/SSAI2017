@@ -27,6 +27,8 @@ help(plot.ppp)
 #' Read The Help Files!
 help(bei)
 #' interactive plot
+library(tkrplot)
+library(rpanel)
 iplot(bei)
 
 #' Make your own point pattern
