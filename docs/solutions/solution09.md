@@ -24,16 +24,6 @@ The command `rThomas` generates simulated realisations of the Thomas model (‘m
 
     ![](solution09_files/figure-markdown_github/unnamed-chunk-3-1.png)![](solution09_files/figure-markdown_github/unnamed-chunk-3-2.png)![](solution09_files/figure-markdown_github/unnamed-chunk-3-3.png)
 
-        ## [[1]]
-        ## Symbol map with no parameters
-        ## 
-        ## [[2]]
-        ## Symbol map with no parameters
-        ## 
-        ## [[3]]
-        ## Symbol map with constant values
-        ## cols: #000000FB
-
     A clustered process -- on average 10 clusters with 8 points. The standard deviation of the cluster distribution is 0.05, so most points will be within distance 0.10 from their parent.
 
 3.  Experiment with the arguments of `rThomas` to obtain point patterns that

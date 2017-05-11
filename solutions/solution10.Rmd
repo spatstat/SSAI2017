@@ -22,7 +22,7 @@ the `swedishpines` data.
 
 1.  We need a guess at the interaction distance $R$. Compute and
     plot the $L$-function of the dataset and choose the value $r$
-    which maximises the discrepancy $|L(r)-r|$.
+    which maximises the discrepancy $\lvert L(r)-r \rvert$.
 
     We plot the above function which we want to maximize.
 

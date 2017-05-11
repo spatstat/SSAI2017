@@ -320,14 +320,14 @@ print(fit.ho)
 
     ## Stationary Strauss process
     ## 
-    ## First order term:  beta = 0.03132301
+    ## First order term:  beta = 0.03025998
     ## 
     ## Interaction distance:    6.984333
-    ## Fitted interaction parameter gamma:   0.1360855
+    ## Fitted interaction parameter gamma:   0.1473619
     ## 
     ## Relevant coefficients:
     ## Interaction 
-    ##   -1.994472 
+    ##   -1.914864 
     ## 
     ## For standard errors, type coef(summary(x))
 

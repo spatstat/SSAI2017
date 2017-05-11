@@ -208,13 +208,16 @@ The cell process (`rcell`) has the same theoretical *K*-function as the uniform 
 
 2.  Generate a simulated realisation of the cell process with a 10x10 grid of cells and plot it.
 
-The data is simulated (and plotted) with the `rcell` function and the following arguments:
+    The data is simulated (and plotted) with the `rcell` function and the following arguments:
 
-`r    X <- rcell(win=square(1), nx = 10, nsim = 1)    plot(X, main = "")`
+    ``` r
+    X <- rcell(win=square(1), nx = 10, nsim = 1)
+    plot(X, main = "")
+    ```
 
-![](solution06_files/figure-markdown_github/unnamed-chunk-21-1.png)
+    ![](solution06_files/figure-markdown_github/unnamed-chunk-21-1.png)
 
-1.  Plot the *K* or *L*-function for this pattern, and determine whether it is distinguishable from a Poisson process.
+3.  Plot the *K* or *L*-function for this pattern, and determine whether it is distinguishable from a Poisson process.
 
     We simulate 19 poisson processes and plot these.
 

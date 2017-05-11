@@ -28,7 +28,7 @@ the Thomas model (‘modified Thomas cluster process’).
 2.  Type `plot(rThomas(10, 0.05, 8))` a few times, and
     interpret the results.
 
-    ```{r}
+    ```{r results="hide"}
     replicate(3, plot(rThomas(10, 0.05, 8), main = ""))
     ```
 

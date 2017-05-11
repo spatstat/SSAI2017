@@ -28,10 +28,6 @@ The dataset `spruces` contains the Norwegian Spruces dataset giving the location
     plot(spruces, markscale = 10)
     ```
 
-        ## Warning: Interpretation of arguments maxsize and markscale has changed (in
-        ## spatstat version 1.37-0 and later). Size of a circle is now measured by its
-        ## diameter.
-
     ![](solution05_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 4.  use `Smooth` (notice the upper case S) to compute and plot a pixel image of the local average tree diameter;
@@ -117,11 +113,8 @@ The dataset `hamster` is a multitype pattern representing the locations of cells
 4.  use `relrisk` to perform cross-validated bandwidth selection and computation of the relative intensity of pyknotic cells.
 
     ``` r
-    plot(relrisk(hamster, hmax = 1, control = "dividing"))
+    plot(relrisk(hamster, hmax = 1, relative = TRUE, control = "dividing"))
     ```
-
-        ## Warning in relrisk.ppp(hamster, hmax = 1, control = "dividing"): Argument
-        ## 'control' was ignored, because relative=FALSE
 
     ![](solution05_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
@@ -142,15 +135,15 @@ The command `rmpoispp` generates simulated realisations of a *multitype* Poisson
     summary(X)
     ```
 
-        ## Marked planar point pattern:  39 points
-        ## Average intensity 39 points per square unit
+        ## Marked planar point pattern:  45 points
+        ## Average intensity 45 points per square unit
         ## 
         ## Coordinates are given to 8 decimal places
         ## 
         ## Multitype:
         ##     frequency proportion intensity
-        ## yes        24  0.6153846        24
-        ## no         15  0.3846154        15
+        ## yes        22  0.4888889        22
+        ## no         23  0.5111111        23
         ## 
         ## Window: rectangle = [0, 1] x [0, 1] units
         ## Window area = 1 square unit
@@ -188,7 +181,7 @@ The command `rmpoispp` generates simulated realisations of a *multitype* Poisson
 
     What is the expected total number of points in `X`?
 
-    We expect 3 ⋅ ∫<sub>0</sub><sup>1</sup>∫<sub>0</sub><sup>1</sup>40 ⋅ (*x* + *y*)*d**x**d**y* = 120 points on average in this case.
+    We expect 3 ⋅ ∫<sub>\[0, 1\]</sub>∫<sub>\[0, 1\]</sub>40(*x* + *y*)*d*​*x*​*d*​*y* = 120 points on average in this case.
 
 ### Exercise 5
 
@@ -229,7 +222,7 @@ Take the Harkness-Isham ants’ nests data `ants`
     rmpoispp(lam, win = Window(ants), types = names(lam))
     ```
 
-        ## Marked planar point pattern: 87 points
+        ## Marked planar point pattern: 69 points
         ## Multitype, with levels = Cataglyphis, Messor 
         ## window: polygonal boundary
         ## enclosing rectangle: [-25, 803] x [-49, 717] units (one unit = 0.5 feet)
@@ -240,7 +233,7 @@ Take the Harkness-Isham ants’ nests data `ants`
     rmpoispp(lam, win = Window(ants))
     ```
 
-        ## Marked planar point pattern: 104 points
+        ## Marked planar point pattern: 98 points
         ## Multitype, with levels = Cataglyphis, Messor 
         ## window: polygonal boundary
         ## enclosing rectangle: [-25, 803] x [-49, 717] units (one unit = 0.5 feet)
