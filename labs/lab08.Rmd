@@ -23,9 +23,9 @@ For the `swedishpines` data:
 1.  Calculate the estimate of the nearest neighbour distance
     distribution function $G$ using `Gest`.
 
-2.  Plot $\hat G(r)$ against $r$
+2.  Plot the estimate of $G(r)$ against $r$.
 
-3.  Plot $\hat G(r)$ against the theoretical (Poisson) value
+3.  Plot the estimate of $G(r)$ against the theoretical (Poisson) value
     $G_{\mbox{pois}}(r) = 1 - \exp(-\lambda \pi r^2)$.
 
 4.  Define Fisher’s variance-stabilising transformation for c.d.f.’s
@@ -44,9 +44,9 @@ For the `swedishpines` data:
 1.  Calculate the estimate of the nearest neighbour distance
     distribution function $F$ using `Fest`.
 
-2.  Plot $\hat F(r)$ against $r$
+2.  Plot the estimate of $F(r)$ against $r$.
 
-3.  Plot $\hat F(r)$ against the theoretical (Poisson) value
+3.  Plot the estimate of $F(r)$ against the theoretical (Poisson) value
     $F_{\mbox{pois}}(r) = 1 - \exp(-\lambda \pi r^2)$.
 
 4.  Define Fisher’s variance-stabilising transformation for c.d.f.’s

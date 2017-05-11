@@ -12,7 +12,7 @@ This session is concerned with summary statistics for
 spacings and interpoint distances.  
 The lecturer's R script is [available here](https://raw.githubusercontent.com/spatstat/SSAI2017/master/Scripts/script08.R) (right click and save).
 
-```{r include=FALSE}
+```{r}
 library(spatstat)
 ```
 
@@ -27,18 +27,18 @@ For the `swedishpines` data:
 G <- Gest(swedishpines)
 ```
 
-2.  Plot $\hat G(r)$ against $r$
+2.  Plot the estimate of $G(r)$ against $r$
 
-```{r, results='hide'}
+```{r}
 plot(G, cbind(km, rs, han) ~ r, main = "Nearest neighbor distance distribution")
 ```
 
-3.  Plot $\hat G(r)$ against the theoretical (Poisson) value
+3.  Plot the estimate of $G(r)$ against the theoretical (Poisson) value
     $G_{\mbox{pois}}(r) = 1 - \exp(-\lambda \pi r^2)$.
 
 E.g.
 
-```{r, results='hide'}
+```{r}
 plot(G, . ~ theo, main = "Nearest neighbor distribution")
 ```
 
@@ -50,12 +50,13 @@ plot(G, . ~ theo, main = "Nearest neighbor distribution")
     Plot the $G$ function using the formula `Phi(.) ~ Phi(theo)`
     and interpret it.
     
-```{r, eval = FALSE}
+```{r}
 Phi <- function(x) asin(sqrt(x))
 plot(G, Phi(.) ~ Phi(theo), main = "Nearest neighbor distribution")
 ```
 
-Without envelopes it's hard to tell if the functions deviate from the identity.
+The transformation has made the deviations from CSR in the central part of the
+curve smaller. We need envelopes to say anything about significance.
 
 ### Exercise 2
 
@@ -68,16 +69,16 @@ For the `swedishpines` data:
 Fhat <- Fest(swedishpines)
 ```
 
-2.  Plot $\hat F(r)$ against $r$
+2.  Plot the estimate of $F(r)$ against $r$
 
-```{r, results='hide'}
-plot(Fhat, main = "Empty Space function distribution")
+```{r}
+plot(Fhat, main = "Empty Space function")
 ```
 
-3.  Plot $\hat F(r)$ against the theoretical (Poisson) value
+3.  Plot the estimate of $F(r)$ against the theoretical (Poisson) value
     $F_{\mbox{pois}}(r) = 1 - \exp(-\lambda \pi r^2)$.
 
-```{r, results='hide'}
+```{r}
 plot(Fhat, . ~ theo, main = "")
 ```
 
@@ -89,9 +90,10 @@ plot(Fhat, . ~ theo, main = "")
     Plot the $F$ function using the formula `Phi(.) ~ Phi(theo)`
     and interpret it.
 
-```{r, results='hide'}
+```{r}
 Phi <- function(x) asin(sqrt(x))
 plot(Fhat, Phi(.) ~ Phi(theo), main = "")
 ```
 
-Again, without envelopes it's hard to conclude whether there is any difference.
+The transformation has changed the picture much. It looks like deviation from CSR,
+but again, without envelopes it's hard to draw conclusions.

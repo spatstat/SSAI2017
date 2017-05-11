@@ -126,7 +126,7 @@ plot(density(split(hamster)), main = "")
     cells.
 
 ```{r}
-plot(relrisk(hamster, casecontrol=FALSE, hmax = 1))
+plot(relrisk(hamster, hmax = 1, control = "dividing"))
 ```
 
 ### Exercise 4
@@ -237,18 +237,67 @@ Harkness-Isham ants’ nests data `ants`.
     Compare the result with `summary(ants)` and explain
     the similarities.
 
+```{r}
+fit1 <- ppm(ants ~ marks)
+```
+
+This is a Poisson model with a separate constant intensity for each mark. The
+fitted intensities are:
+```{r}
+exp(coef(fit1)[1])
+exp(coef(fit1)[1] + coef(fit1)[2])
+```
+
+This agrees perfectly with the output of `summary(ants)`:
+```{r}
+summary(ants)
+```
+
 2.  Fit the model `ppm(ants ~ marks + x)` and write down an
     expression for the fitted intensity function.
+
+```{r}
+fit2 <- ppm(ants ~ marks + x)
+(co <- coef(fit2))
+```
+
+Intensity for the reference type (Cataglyphis):
+
+$$\lambda( (x,y) ) = \exp(`r co[["(Intercept)"]]` + `r co[["x"]]` \cdot x)$$
+
+Intensity for the other type (Messor):
+
+$$\lambda( (x,y) ) = \exp(`r co[["(Intercept)"]]` + `r co[["marksMessor"]]` + `r co[["x"]]` \cdot x)$$
 
 3.  Fit the model `ppm(ants ~ marks * x)` and write down an
     expression for the fitted intensity function.
 
+```{r}
+fit3 <- ppm(ants ~ marks * x)
+(co <- coef(fit3))
+```
+
+Intensity for the reference type (Cataglyphis):
+
+$$\lambda( (x,y) ) = \exp(`r co[["(Intercept)"]]` + `r co[["x"]]` \cdot x)$$
+
+Intensity for the other type (Messor):
+
+$$\lambda( (x,y) ) = \exp(`r co[["(Intercept)"]]` + `r co[["marksMessor"]]` + (`r co[["x"]]` + `r co[["marksMessor"]]`) \cdot x)$$
+
 4.  Compute the fitted intensities of the three models fitted above 
     using `predict` and plot the results.
+
+```{r}
+pred <- c(predict(fit1), predict(fit2), predict(fit3))
+plot(as.solist(pred), ncols = 2, main = "")
+```
 
 5.  Explain the difference between the models fitted by
     `ppm(ants ~ marks + x)` and `ppm(ants ~ marks * x)` .
 
+For the additive model the effect of the `x` coordinate is the same for both types
+of ants, while the effect of `x` differs in the multiplicative model.
 
 ### Exercise 7
 
@@ -270,8 +319,21 @@ fs <- function(x,y) {
 ```
 
 Now fit the models:
-```{r}
-ppm(ants ~ marks + side, covariates=list(side=fs))
-ppm(ants ~ marks * side, covariates=list(side=fs))
+```{r, eval=FALSE}
+ppm(ants ~ marks + side, data = list(side=fs))
+ppm(ants ~ marks * side, data = list(side=fs))
 ```
 and interpret the results.
+
+```{r}
+fit1 <- ppm(ants ~ marks + side, data = list(side=fs))
+fit2 <- ppm(ants ~ marks * side, data = list(side=fs))
+```
+
+In the first model the fitted intensity is lower in the scrub than in the field
+(but this effect is not significant).
+
+In the second model the fitted intensity of Cataglyphis is lower in the scrub
+than the intensity of Cataglyphis in the field, where as it is the other way
+around for Messor. When we allow for the different effect between ant types the
+scrub/field covariate is significant.

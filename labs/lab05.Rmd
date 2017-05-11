@@ -178,7 +178,7 @@ fs <- function(x,y) {
 
 Now fit the models:
 ```{r}
-ppm(ants ~ marks + side, covariates=list(side=fs))
-ppm(ants ~ marks * side, covariates=list(side=fs))
+ppm(ants ~ marks + side, data = list(side=fs))
+ppm(ants ~ marks * side, data = list(side=fs))
 ```
 and interpret the results.

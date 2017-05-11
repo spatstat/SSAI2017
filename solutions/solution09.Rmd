@@ -12,7 +12,7 @@ This session is concerned with summary statistics for interpoint
 spacing and distances.  
 The lecturer's R script is [available here](https://raw.githubusercontent.com/spatstat/SSAI2017/master/Scripts/script09.R) (right click and save).
 
-```{r include=FALSE}
+```{r}
 library(spatstat)
 ```
 
@@ -28,12 +28,11 @@ See `help("rThomas")`.
 2.  Type `plot(rThomas(10, 0.05, 8))` a few times, and
     interpret the results.
 
-```{r, results="hide", echo=-1}
-par(mar=rep(0,4))
+```{r}
 replicate(3, plot(rThomas(10, 0.05, 8), main = ""))
 ```
 
-A clustered process -- on average 10 clusters with 8 points with a standard deviation of 0.05 from their parent (i.e. approximately at distance 0.05 from their parent on average.
+A clustered process -- on average 10 clusters with 8 points. The standard deviation of the cluster distribution is 0.05, so most points will be within distance 0.10 from their parent.
 
 3.  Experiment with the arguments of `rThomas` to obtain
     point patterns that
@@ -44,16 +43,14 @@ A clustered process -- on average 10 clusters with 8 points with a standard devi
 We get few clusters by reducing the intensity of the parent process (first argument).
 Tightly and separated clusters are obtained by reducing the standard deviation (second argument).
 
-```{r, echo=-1}
-par(mar=rep(0,4))
+```{r}
 plot(rThomas(5, 0.01, 8), main = "")
 ```
 
-We simulate from a Poisson process with the same intensity as the parent process of the Thomas process:
+If the are many clusters with a large standard deviation it looks like Poisson.
 
-```{r, echo=-1}
-par(mar=rep(0,4))
-plot(rpoispp(5), main = "")
+```{r}
+plot(rThomas(100, 1, 1), main = "")
 ```
 
 
@@ -82,11 +79,12 @@ plot(fit, main = "")
 3.  Read off the parameters of the fitted model, and generate a
     simulated realisation of the fitted model using `rThomas`.
 
-From the previous output, we can read off the parameters to do the simulation:
+From the previous output, we can read off the parameters to do the simulation
+(or we can use `parameters` to extract them):
 
-```{r, echo=-1}
-par(mar=rep(0,4))
-rt2 <- rThomas(kappa = 23.55, scale = 0.04, mu = 2.63)
+```{r}
+(p <- parameters(fit))
+rt2 <- rThomas(kappa = p$kappa, scale = p$scale, mu = p$mu)
 plot(rt2, main = "")
 ```
 
@@ -95,13 +93,12 @@ plot(rt2, main = "")
 
 OK, let try that alternative:
 
-```{r, echo=-1}
-par(mar=rep(0,4))
-plot(simulate(fit), main = "", main.panel = "")
+```{r}
+plot(simulate(fit, drop = TRUE), main = "")
 ```
 
 5.  Try the command
-    ```{r}
+    ```{r eval=FALSE}
     fit2 <- kppm(redwood ~ 1, clusters="Thomas", startpar=c(kappa=10, scale=0.1))
     ```
     and briefly explore the fitting algorithm’s sensitivity to the
@@ -114,7 +111,8 @@ kppm(redwood ~ 1, clusters="Thomas", startpar=c(kappa=10, scale=0.1))
 kppm(redwood ~ 1, clusters="Thomas", startpar=c(kappa=100, scale=0.01))
 ```
 
-However, for a very small parent intensity (kappa) and large offspring scale the fit is poor. This basically corresponds a Poisson point process.
+However, for a very small parent intensity (kappa) and large offspring scale the
+fit changes considerably.
 
 ```{r}
 kppm(redwood ~ 1, clusters="Thomas", startpar=c(kappa=0.1, scale=10))
@@ -123,13 +121,14 @@ kppm(redwood ~ 1, clusters="Thomas", startpar=c(kappa=0.1, scale=10))
 6.  Generate and plot several simulated realisations of the fitted
     model, to assess whether it is plausible.
 
-```{r, echo=-1}
-par(mar=rep(0,4))
-plot(simulate(fit, nsim = 12), main = "", main.panel = "")
-plot(redwood)
+```{r}
+XX <- simulate(fit, nsim = 11)
+XX[[12]] <- redwood
+plot(XX, main = "", main.panel = "")
 ```
 
-The actual data do not look too different from the simulated.
+The actual data do not look too different from the simulated (apart from the
+artificial discretisation in the real data which can be seen on larger plots).
 
 7.  Extract and plot the fitted pair correlation function by
     ```{r, eval = FALSE}
@@ -148,7 +147,7 @@ plot(pcffit, xlim = c(0, 0.3), main = "pair correlation")
     envelopes of the $L$ function from this fitted model. Do they
     suggest the model is plausible?
 
-```{r, results='hide'}
+```{r}
 plot(envelope(fit, Lest, nsim = 39, global = TRUE))
 ```
 
@@ -179,5 +178,4 @@ vcov(mfit)
 vcov(ppm(redwood ~ 1))
 ```
 
-As can be seen, the variance of the intensity estimate is quite a bit larger in the Matern model. This comes naturally by the doubly stochasic of the Matern model.
-
+As can be seen, the variance of the intensity estimate is quite a bit larger in the Matern model. This comes naturally by the doubly stochastic construction of the Matern model.
