@@ -4,3 +4,5 @@
 .Rapp*
 */.Rapp*
 */*/.Rapp*
+.Rproj.user
+*_site
