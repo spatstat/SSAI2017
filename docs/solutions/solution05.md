@@ -16,42 +16,46 @@ The dataset `spruces` contains the Norwegian Spruces dataset giving the location
 
 2.  access the dataset and plot it;
 
-``` r
-plot(spruces)
-```
+    ``` r
+    plot(spruces)
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-3-1.png)
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
-1.  re-plot the data so that the tree diameters are displayed at a physical scale that is 10 times the physical scale of the location coordinates.
+3.  re-plot the data so that the tree diameters are displayed at a physical scale that is 10 times the physical scale of the location coordinates.
 
-``` r
-plot(spruces, markscale = 10)
-```
+    ``` r
+    plot(spruces, markscale = 10)
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-4-1.png)
+        ## Warning: Interpretation of arguments maxsize and markscale has changed (in
+        ## spatstat version 1.37-0 and later). Size of a circle is now measured by its
+        ## diameter.
 
-1.  use `Smooth` (notice the upper case S) to compute and plot a pixel image of the local average tree diameter;
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
-``` r
-plot(Smooth(spruces, sigma = 8))
-```
+4.  use `Smooth` (notice the upper case S) to compute and plot a pixel image of the local average tree diameter;
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-5-1.png)
+    ``` r
+    plot(Smooth(spruces, sigma = 8))
+    ```
 
-1.  trees are normally classified as ‘adult’ when their diameter exceeds 30 centimetres. Use the `cut` command to classify each tree as adult or juvenile, and produce a multitype point pattern in which the trees are marked as adult or juvenile. Plot this pattern, and plot the adults and juveniles separately.
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-``` r
-cutspruces <- cut(spruces, breaks = c(0,0.3,0.4), labels = c("juvenile", "adult"))
-plot(cutspruces, main = "")
-```
+5.  trees are normally classified as ‘adult’ when their diameter exceeds 30 centimetres. Use the `cut` command to classify each tree as adult or juvenile, and produce a multitype point pattern in which the trees are marked as adult or juvenile. Plot this pattern, and plot the adults and juveniles separately.
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-6-1.png)
+    ``` r
+    cutspruces <- cut(spruces, breaks = c(0,0.3,0.4), labels = c("juvenile", "adult"))
+    plot(cutspruces, main = "")
+    ```
 
-``` r
-plot(split(cutspruces), main = "")
-```
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-6-2.png)
+    ``` r
+    plot(split(cutspruces), main = "")
+    ```
+
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-6-2.png)
 
 ### Exercise 2
 
@@ -61,26 +65,26 @@ It records the locations of anthills recorded in a 1200x1500 metre study region 
 
 1.  read the data into `R` as a data frame, using the `R` function `read.table`. (Since the input file has a header line, you will need to use the argument `header=TRUE` when you call `read.table`.)
 
-``` r
-dat <- read.table(file = "../Data/anthills.txt", header = TRUE)
-```
+    ``` r
+    dat <- read.table(file = "../Data/anthills.txt", header = TRUE)
+    ```
 
-1.  check the data for any peculiarities.
+2.  check the data for any peculiarities.
 
-2.  create a point pattern `hills` containing these data. Ensure that the marks are a factor, and that the unit of length is given its correct name.
+3.  create a point pattern `hills` containing these data. Ensure that the marks are a factor, and that the unit of length is given its correct name.
 
-``` r
-hills <- with(dat, ppp(x, y, xrange = c(0, 1200), yrange = c(0, 1500),
-                       marks = status, units=c("metre", "metres")))
-```
+    ``` r
+    hills <- with(dat, ppp(x, y, xrange = c(0, 1200), yrange = c(0, 1500),
+                           marks = status, units=c("metre", "metres")))
+    ```
 
-1.  plot the data.
+4.  plot the data.
 
-``` r
-plot(hills, main = "")
-```
+    ``` r
+    plot(hills, main = "")
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-9-1.png)
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 ### Exercise 3
 
@@ -88,35 +92,38 @@ The dataset `hamster` is a multitype pattern representing the locations of cells
 
 1.  plot the data;
 
-``` r
-plot(hamster)
-```
+    ``` r
+    plot(hamster)
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-10-1.png)
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
-1.  plot the patterns of pyknotic and dividing cells separately;
+2.  plot the patterns of pyknotic and dividing cells separately;
 
-``` r
-plot(split(hamster), main = "")
-```
+    ``` r
+    plot(split(hamster), main = "")
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-11-1.png)
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
-1.  plot kernel estimates of the intensity functions of pyknotic and dividing cells separately;
+3.  plot kernel estimates of the intensity functions of pyknotic and dividing cells separately;
 
-``` r
-plot(density(split(hamster)), main = "")
-```
+    ``` r
+    plot(density(split(hamster)), main = "")
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-12-1.png)
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
-1.  use `relrisk` to perform cross-validated bandwidth selection and computation of the relative intensity of pyknotic cells.
+4.  use `relrisk` to perform cross-validated bandwidth selection and computation of the relative intensity of pyknotic cells.
 
-``` r
-plot(relrisk(hamster, casecontrol=FALSE, hmax = 1))
-```
+    ``` r
+    plot(relrisk(hamster, hmax = 1, control = "dividing"))
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-13-1.png)
+        ## Warning in relrisk.ppp(hamster, hmax = 1, control = "dividing"): Argument
+        ## 'control' was ignored, because relative=FALSE
+
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 ### Exercise 4
 
@@ -130,33 +137,33 @@ The command `rmpoispp` generates simulated realisations of a *multitype* Poisson
 
     What is the expected total number of points generated by this command?
 
-``` r
-X <- rmpoispp(21, win=square(1), types=c("yes", "no"))
-summary(X)
-```
+    ``` r
+    X <- rmpoispp(21, win=square(1), types=c("yes", "no"))
+    summary(X)
+    ```
 
-    ## Marked planar point pattern:  41 points
-    ## Average intensity 41 points per square unit
-    ## 
-    ## Coordinates are given to 8 decimal places
-    ## 
-    ## Multitype:
-    ##     frequency proportion intensity
-    ## yes        19  0.4634146        19
-    ## no         22  0.5365854        22
-    ## 
-    ## Window: rectangle = [0, 1] x [0, 1] units
-    ## Window area = 1 square unit
+        ## Marked planar point pattern:  39 points
+        ## Average intensity 39 points per square unit
+        ## 
+        ## Coordinates are given to 8 decimal places
+        ## 
+        ## Multitype:
+        ##     frequency proportion intensity
+        ## yes        24  0.6153846        24
+        ## no         15  0.3846154        15
+        ## 
+        ## Window: rectangle = [0, 1] x [0, 1] units
+        ## Window area = 1 square unit
 
-``` r
-plot(X, main = "")
-```
+    ``` r
+    plot(X, main = "")
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-15-1.png)
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
-We expect 2 × 21 = 42 points on average.
+    We expect 2 × 21 = 42 points on average.
 
-1.  If `lambda` is a vector of numbers, the vector entries specify the intensities for each type of point. Try
+2.  If `lambda` is a vector of numbers, the vector entries specify the intensities for each type of point. Try
 
     ``` r
     rmpoispp(c(20,40,20), types=letters[1:3])
@@ -164,13 +171,13 @@ We expect 2 × 21 = 42 points on average.
 
     What is the expected total number of points generated by this command?
 
-``` r
-rmpoispp(c(20,40,20), types=letters[1:3])
-```
+    ``` r
+    rmpoispp(c(20,40,20), types=letters[1:3])
+    ```
 
-We expect 20 + 40 + 20 = 80 points on average in this case.
+    We expect 20 + 40 + 20 = 80 points on average in this case.
 
-1.  If `lambda` is a function with arguments `x,y,m` then this is interpreted as the intensity function *λ*(*x*, *y*, *m*). Try
+3.  If `lambda` is a function with arguments `x,y,m` then this is interpreted as the intensity function *λ*(*x*, *y*, *m*). Try
 
     ``` r
     fun <- function(x,y,m) { 40 * (x+y) }
@@ -181,7 +188,7 @@ We expect 20 + 40 + 20 = 80 points on average in this case.
 
     What is the expected total number of points in `X`?
 
-We expect 3 ⋅ ∫<sub>0</sub><sup>1</sup>∫<sub>0</sub><sup>1</sup>40 ⋅ (*x* + *y*)*d**x**d**y* = 120 points on average in this case.
+    We expect 3 ⋅ ∫<sub>0</sub><sup>1</sup>∫<sub>0</sub><sup>1</sup>40 ⋅ (*x* + *y*)*d**x**d**y* = 120 points on average in this case.
 
 ### Exercise 5
 
@@ -189,76 +196,76 @@ Take the Harkness-Isham ants’ nests data `ants`
 
 1.  use `summary` to estimate the average intensities of the points of each type.
 
-``` r
-summary(ants)
-```
+    ``` r
+    summary(ants)
+    ```
 
-    ## Marked planar point pattern:  97 points
-    ## Average intensity 0.0002261486 points per square unit (one unit = 0.5 
-    ## feet)
-    ## 
-    ## Coordinates are integers
-    ## i.e. rounded to the nearest unit (one unit = 0.5 feet)
-    ## 
-    ## Multitype:
-    ##             frequency proportion    intensity
-    ## Cataglyphis        29  0.2989691 6.761144e-05
-    ## Messor             68  0.7010309 1.585372e-04
-    ## 
-    ## Window: polygonal boundary
-    ## single connected closed polygon with 11 vertices
-    ## enclosing rectangle: [-25, 803] x [-49, 717] units
-    ## Window area = 428922 square units
-    ## Unit of length: 0.5 feet
-    ## Fraction of frame area: 0.676
+        ## Marked planar point pattern:  97 points
+        ## Average intensity 0.0002261486 points per square unit (one unit = 0.5 
+        ## feet)
+        ## 
+        ## Coordinates are integers
+        ## i.e. rounded to the nearest unit (one unit = 0.5 feet)
+        ## 
+        ## Multitype:
+        ##             frequency proportion    intensity
+        ## Cataglyphis        29  0.2989691 6.761144e-05
+        ## Messor             68  0.7010309 1.585372e-04
+        ## 
+        ## Window: polygonal boundary
+        ## single connected closed polygon with 11 vertices
+        ## enclosing rectangle: [-25, 803] x [-49, 717] units
+        ## Window area = 428922 square units
+        ## Unit of length: 0.5 feet
+        ## Fraction of frame area: 0.676
 
-``` r
-lam <- intensity(ants)
-```
+    ``` r
+    lam <- intensity(ants)
+    ```
 
-1.  Generate and plot a realisation of a marked Poisson process in the same window as the data, with the same possible types of points, with uniform intensities for each type, given by the intensities estimated from the data.
+2.  Generate and plot a realisation of a marked Poisson process in the same window as the data, with the same possible types of points, with uniform intensities for each type, given by the intensities estimated from the data.
 
-``` r
-rmpoispp(lam, win = Window(ants), types = names(lam))
-```
+    ``` r
+    rmpoispp(lam, win = Window(ants), types = names(lam))
+    ```
 
-    ## Marked planar point pattern: 101 points
-    ## Multitype, with levels = Cataglyphis, Messor 
-    ## window: polygonal boundary
-    ## enclosing rectangle: [-25, 803] x [-49, 717] units (one unit = 0.5 feet)
+        ## Marked planar point pattern: 87 points
+        ## Multitype, with levels = Cataglyphis, Messor 
+        ## window: polygonal boundary
+        ## enclosing rectangle: [-25, 803] x [-49, 717] units (one unit = 0.5 feet)
 
-Or the even shorter
+    Or the even shorter
 
-``` r
-rmpoispp(lam, win = Window(ants))
-```
+    ``` r
+    rmpoispp(lam, win = Window(ants))
+    ```
 
-    ## Marked planar point pattern: 96 points
-    ## Multitype, with levels = Cataglyphis, Messor 
-    ## window: polygonal boundary
-    ## enclosing rectangle: [-25, 803] x [-49, 717] units (one unit = 0.5 feet)
+        ## Marked planar point pattern: 104 points
+        ## Multitype, with levels = Cataglyphis, Messor 
+        ## window: polygonal boundary
+        ## enclosing rectangle: [-25, 803] x [-49, 717] units (one unit = 0.5 feet)
 
-1.  Repeat the simulation several times. Do the simulations look like the data?
+3.  Repeat the simulation several times. Do the simulations look like the data?
 
-Make 11 simulations:
+    Make 11 simulations:
 
-``` r
-simants <- rmpoispp(lam, win = Window(ants), types = names(lam), nsim = 11)
-```
+    ``` r
+    simants <- rmpoispp(lam, win = Window(ants), types = names(lam), nsim = 11)
+    ```
 
-Add original data as list item number 12:
+    Add original data as list item number 12:
 
-``` r
-simants[[12]] <- ants
-```
+    ``` r
+    simants[[12]] <- ants
+    ```
 
-Plot them all:
+    Plot them all:
 
-``` r
-plot(simants, legend = FALSE, main = "")
-```
+    ``` r
+    plot(simants, legend = FALSE, main = "")
+    ```
 
-![](solution05_files/figure-markdown_github/unnamed-chunk-24-1.png)
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-24-1.png)
 
 ### Exercise 6
 
@@ -266,13 +273,99 @@ Here we will fit multitype Poisson point process models to the Harkness-Isham an
 
 1.  Fit the model `ppm(ants ~ marks)` and interpret the result. Compare the result with `summary(ants)` and explain the similarities.
 
+    ``` r
+    fit1 <- ppm(ants ~ marks)
+    ```
+
+    This is a Poisson model with a separate constant intensity for each mark. The fitted intensities are:
+
+    ``` r
+    exp(coef(fit1)[1])
+    ```
+
+        ##  (Intercept) 
+        ## 6.762949e-05
+
+    ``` r
+    exp(coef(fit1)[1] + coef(fit1)[2])
+    ```
+
+        ##  (Intercept) 
+        ## 0.0001585795
+
+    This agrees perfectly with the output of `summary(ants)`:
+
+    ``` r
+    summary(ants)
+    ```
+
+        ## Marked planar point pattern:  97 points
+        ## Average intensity 0.0002261486 points per square unit (one unit = 0.5 
+        ## feet)
+        ## 
+        ## Coordinates are integers
+        ## i.e. rounded to the nearest unit (one unit = 0.5 feet)
+        ## 
+        ## Multitype:
+        ##             frequency proportion    intensity
+        ## Cataglyphis        29  0.2989691 6.761144e-05
+        ## Messor             68  0.7010309 1.585372e-04
+        ## 
+        ## Window: polygonal boundary
+        ## single connected closed polygon with 11 vertices
+        ## enclosing rectangle: [-25, 803] x [-49, 717] units
+        ## Window area = 428922 square units
+        ## Unit of length: 0.5 feet
+        ## Fraction of frame area: 0.676
+
 2.  Fit the model `ppm(ants ~ marks + x)` and write down an expression for the fitted intensity function.
+
+    ``` r
+    fit2 <- ppm(ants ~ marks + x)
+    (co <- coef(fit2))
+    ```
+
+        ##   (Intercept)   marksMessor             x 
+        ## -9.5243832518  0.8522118655 -0.0002041438
+
+    Intensity for the reference type (Cataglyphis):
+
+    *λ*((*x*, *y*)) = exp(−9.5243833 + −2.0414381 × 10<sup>−4</sup> ⋅ *x*)
+
+    Intensity for the other type (Messor):
+
+    *λ*((*x*, *y*)) = exp(−9.5243833 + 0.8522119 + −2.0414381 × 10<sup>−4</sup> ⋅ *x*)
 
 3.  Fit the model `ppm(ants ~ marks * x)` and write down an expression for the fitted intensity function.
 
+    ``` r
+    fit3 <- ppm(ants ~ marks * x)
+    (co <- coef(fit3))
+    ```
+
+        ##   (Intercept)   marksMessor             x marksMessor:x 
+        ## -9.605698e+00  9.676854e-01  1.107981e-05 -3.071343e-04
+
+    Intensity for the reference type (Cataglyphis):
+
+    *λ*((*x*, *y*)) = exp(−9.605698 + 1.1079805 × 10<sup>−5</sup> ⋅ *x*)
+
+    Intensity for the other type (Messor):
+
+    *λ*((*x*, *y*)) = exp(−9.605698 + 0.9676854 + (1.1079805 × 10<sup>−5</sup> + 0.9676854)⋅*x*)
+
 4.  Compute the fitted intensities of the three models fitted above using `predict` and plot the results.
 
+    ``` r
+    pred <- c(predict(fit1), predict(fit2), predict(fit3))
+    plot(as.solist(pred), ncols = 2, main = "")
+    ```
+
+    ![](solution05_files/figure-markdown_github/unnamed-chunk-30-1.png)
+
 5.  Explain the difference between the models fitted by `ppm(ants ~ marks + x)` and `ppm(ants ~ marks * x)` .
+
+    For the additive model the effect of the `x` coordinate is the same for both types of ants, while the effect of `x` differs in the multiplicative model.
 
 ### Exercise 7
 
@@ -293,49 +386,17 @@ fs <- function(x,y) {
 Now fit the models:
 
 ``` r
-ppm(ants ~ marks + side, covariates=list(side=fs))
+ppm(ants ~ marks + side, data = list(side=fs))
+ppm(ants ~ marks * side, data = list(side=fs))
 ```
-
-    ## Nonstationary multitype Poisson process
-    ## 
-    ## Possible marks: 'Cataglyphis' and 'Messor'
-    ## 
-    ## Log intensity:  ~marks + side
-    ## 
-    ## Fitted trend coefficients:
-    ## (Intercept) marksMessor   sidescrub 
-    ## -9.57189990  0.85221187 -0.07380742 
-    ## 
-    ##                Estimate      S.E.    CI95.lo    CI95.hi Ztest        Zval
-    ## (Intercept) -9.57189990 0.2027872 -9.9693554 -9.1744444   *** -47.2017058
-    ## marksMessor  0.85221187 0.2217851  0.4175210  1.2869027   ***   3.8425114
-    ## sidescrub   -0.07380742 0.2080023 -0.4814844  0.3338695        -0.3548395
-
-``` r
-ppm(ants ~ marks * side, covariates=list(side=fs))
-```
-
-    ## Nonstationary multitype Poisson process
-    ## 
-    ## Possible marks: 'Cataglyphis' and 'Messor'
-    ## 
-    ## Log intensity:  ~marks * side
-    ## 
-    ## Fitted trend coefficients:
-    ##           (Intercept)           marksMessor             sidescrub 
-    ##            -9.3509797             0.5198755            -0.7789884 
-    ## marksMessor:sidescrub 
-    ##             0.9682016 
-    ## 
-    ##                         Estimate      S.E.      CI95.lo     CI95.hi Ztest
-    ## (Intercept)           -9.3509797 0.2132007 -9.768845473 -8.93311402   ***
-    ## marksMessor            0.5198755 0.2692240 -0.007793922  1.04754484      
-    ## sidescrub             -0.7789884 0.4339489 -1.629512751  0.07153586      
-    ## marksMessor:sidescrub  0.9682016 0.4975910 -0.007058797  1.94346199      
-    ##                             Zval
-    ## (Intercept)           -43.859983
-    ## marksMessor             1.931014
-    ## sidescrub              -1.795115
-    ## marksMessor:sidescrub   1.945778
 
 and interpret the results.
+
+``` r
+fit1 <- ppm(ants ~ marks + side, data = list(side=fs))
+fit2 <- ppm(ants ~ marks * side, data = list(side=fs))
+```
+
+In the first model the fitted intensity is lower in the scrub than in the field (but this effect is not significant).
+
+In the second model the fitted intensity of Cataglyphis is lower in the scrub than the intensity of Cataglyphis in the field, where as it is the other way around for Messor. When we allow for the different effect between ant types the scrub/field covariate is significant.

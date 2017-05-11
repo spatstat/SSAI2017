@@ -25,56 +25,57 @@ included with `spatstat` as the dataset `ponderosa`.
 
 1.  assign the data to a shorter name, like `X` or `P`;
 
-To assign the data to `X` we simply write:
-
-```{r}
-X <- ponderosa
-```
+    To assign the data to `X` we simply write:
+    
+    ```{r}
+    X <- ponderosa
+    ```
 
 2.  plot the data;
 
-To plot the data we do the following:
+    To plot the data we do the following:
+    
+    ```{r}
+    plot(X)
+    ```
 
-```{r}
-plot(X)
-```
-
-By the S3 method dispatch, this calls the `plot.ppp` function.
-The `chars` argument indicate that the point type should be be periods ("`.`").
+    By the S3 method dispatch, this calls the `plot.ppp` function.
+    The `chars` argument indicate that the point type should be be periods ("`.`").
 
 3.  find out how many trees are recorded;
 
-Both `npoints` and `print.ppp` displays the number of recorded trees:
+    Both `npoints` and `print.ppp` displays the number of recorded trees:
 
-```{r}
-npoints(X)
-print(X)
-```
-
-I.e. there are 108 trees in the dataset.
+    ```{r}
+    npoints(X)
+    print(X)
+    ```
+    
+    I.e. there are 108 trees in the dataset.
 
 4.  find the dimensions of the study region;
 
-The dimensions of the observation window can be seen above. Alternatively, it can be directly assesed via
+    The dimensions of the observation window can be seen above. Alternatively, it
+    can be directly assesed via
 
-```{r}
-window(X)
-```
+    ```{r}
+    window(X)
+    ```
 
 5.  obtain an estimate of the average intensity of trees (number of
     trees per unit area).
 
-The average intensity can be computed via `intensity.ppp`
+    The average intensity can be computed via `intensity.ppp`
+    
+    ```{r}
+    intensity(X)
+    ```
 
-```{r}
-intensity(X)
-```
-
-or the more expansive `summary.ppp`:
-
-```{r}
-summary(X)
-```
+    or the more expansive `summary.ppp`:
+    
+    ```{r}
+    summary(X)
+    ```
 
 ### Exercise 2
 
@@ -86,15 +87,15 @@ The Ponderosa data, continued:
     `plot.ppp`, and find out which argument to the
     function can be used to control the main title for the plot;
 
-From the documentation, the argument that controls the title is `main` as is 
-also the case in the regular generic `plot`.
+    From the documentation, the argument that controls the title is `main` as is 
+    also the case in the regular generic `plot`.
 
 2.  plot the Ponderosa data with the title *Ponderosa Pine
     Trees* above it;
   
-```{r}
-plot(ponderosa, main = "Ponderosa Pine Trees")
-```
+    ```{r}
+    plot(ponderosa, main = "Ponderosa Pine Trees")
+    ```
 
 3.  from your reading of the help file, predict what will happen if
     we type
@@ -103,11 +104,11 @@ plot(ponderosa, main = "Ponderosa Pine Trees")
     ```
     then check that your guess was correct;
     
-Each point will be plotted as an green "X" and indeed:
-
-```{r}
-plot(ponderosa, chars="X", cols="green")
-```
+    Each point will be plotted as an green "X" and indeed:
+    
+    ```{r}
+    plot(ponderosa, chars="X", cols="green")
+    ```
 
 4.  try different values of the argument `chars`, for
     example, one of the integers 0 to 25, or a letter of the
@@ -115,14 +116,15 @@ plot(ponderosa, chars="X", cols="green")
     `chars="+"`, and the difference between `chars=4` and
     `chars="X"`).
 
-There are subtle differences in the actual character/point types plotted. When given a string literal, the actual character is plotted as the point type.
+    There are subtle differences in the actual character/point types plotted.
+    When given a string literal, the actual character is plotted as the point type.
 
-```{r}
-plot(ponderosa, chars=3, cols="green")
-plot(ponderosa, chars="+", cols="green")
-plot(ponderosa, chars=4, cols="green")
-plot(ponderosa, chars="X", cols="green")
-```
+    ```{r}
+    plot(ponderosa, chars=3, cols="green")
+    plot(ponderosa, chars="+", cols="green")
+    plot(ponderosa, chars=4, cols="green")
+    plot(ponderosa, chars="X", cols="green")
+    ```
 
 
 ### Exercise 3
@@ -167,37 +169,39 @@ the ecological ‘status’ of each anthill (in this exercise we will ignore thi
     will need to use the argument `header=TRUE` when you call
     `read.table`.)
 
-We read the data into R with the line:
-
-```{r}
-dat <- read.table(file = "../Data/anthills.txt", header = TRUE)
-```
+    We read the data into R with the line:
+    
+    ```{r}
+    dat <- read.table(file = "../Data/anthills.txt", header = TRUE)
+    ```
 
 2.  check the data for any peculiarities.
 
-Looking at the first entries of the dataset with
+    Looking at the first entries of the dataset with
+    
+    ```{r}
+    head(dat)
+    ```
 
-```{r}
-head(dat)
-```
-
-We see that there is a `status` variable indicating that this is a *marked* point process.
+    We see that there is a `status` variable indicating that this is a *marked*
+    point process.
 
 3.  create a point pattern `hills` containing these data.
     Ensure that the unit of length is given its correct name.
 
-As before
-```{r}
-hills <- with(dat, ppp(x, y, xrange = c(0, 1200), yrange = c(0, 1500), 
-                       units=c("metre", "metres")))
-```
-
-The `ppp` function passes the appropriate arguments to `owin` which we therefore do not need to call explicitly.
+    As before
+    ```{r}
+    hills <- with(dat, ppp(x, y, xrange = c(0, 1200), yrange = c(0, 1500), 
+                           units=c("metre", "metres")))
+    ```
+    
+    The `ppp` function passes the appropriate arguments to `owin` which we
+    therefore do not need to call explicitly.
 
 4.  plot the data.
 
-As before, we can now plot the data:
-
-```{r}
-plot(hills, pch = 16, cex = 0.3, main = "Anthill locations")
-````
+    As before, we can now plot the data:
+    
+    ```{r}
+    plot(hills, pch = 16, cex = 0.3, main = "Anthill locations")
+    ````

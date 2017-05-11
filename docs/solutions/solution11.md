@@ -31,7 +31,7 @@ The `amacrine` dataset contains the locations of cells of two types (“on” an
 
 3.  What is the overall interpretation of these summary functions?
 
-Inhibition for types of same type. Independence between types.
+    Inhibition for types of same type. Independence between types.
 
 ### Exercise 2
 
@@ -55,7 +55,7 @@ Continuing with the `amacrine` data,
 
 3.  What is the overall interpretation of the *G*-functions?
 
-Same as before.
+    Same as before.
 
 ### Exercise 3
 
@@ -65,17 +65,17 @@ The dataset `bramblecanes` gives the locations and ages of bramble cane plants i
 
 2.  We will use the bivariate *K*-function *K*<sub>2, 0</sub> as our summary statistic. Compute this for the data using `Kcross(bramblecanes, "2", "0")` and plot it.
 
-``` r
-plot(Kcross(bramblecanes, "2", "0"))
-```
+    ``` r
+    plot(Kcross(bramblecanes, "2", "0"))
+    ```
 
-![](solution11_files/figure-markdown_github/unnamed-chunk-7-1.png)
+    ![](solution11_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
-1.  Read the help for `Kcross`. Find the names of the second and third arguments to the function.
+3.  Read the help for `Kcross`. Find the names of the second and third arguments to the function.
 
     The names are `i` and `j`. Alternatively the arguments `from` and `to` can be used for the same purpose.
 
-2.  Generate the simulation envelopes as follows
+4.  Generate the simulation envelopes as follows
 
     ``` r
     shuffle <- expression(rlabel(bramblecanes))
@@ -95,7 +95,7 @@ plot(Kcross(bramblecanes, "2", "0"))
 
     Note that the named arguments `i` and `j` are not recognised by the `envelope` command (as we can check from the help file for `envelope`), so they are passed to the command `Kcross` as we intended.
 
-3.  Generate the corresponding simulation envelopes of the bivariate *L*-function, either by replacing `Kcross` by `Lcross` in the code above, or by
+5.  Generate the corresponding simulation envelopes of the bivariate *L*-function, either by replacing `Kcross` by `Lcross` in the code above, or by
 
     ``` r
     plot(E, sqrt(./pi) ~ r)
@@ -109,17 +109,13 @@ We want to fit a Gibbs process model to the `betacells` data.
 
 1.  Access the `betacells` data and plot the pattern.
 
-``` r
-plot(betacells, main = "Beta cells")
-```
+    ``` r
+    plot(betacells, main = "Beta cells")
+    ```
 
-    ## Warning: Interpretation of arguments maxsize and markscale has changed (in
-    ## spatstat version 1.37-0 and later). Size of a circle is now measured by its
-    ## diameter.
+    ![](solution11_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
-![](solution11_files/figure-markdown_github/unnamed-chunk-10-1.png)
-
-1.  Save the data as a point pattern `X` and save only the mark `type`
+2.  Save the data as a point pattern `X` and save only the mark `type`
 
     ``` r
     X <- betacells
@@ -128,26 +124,26 @@ plot(betacells, main = "Beta cells")
 
     Also we will save the two type names:
 
-``` r
-typ <- levels(marks(X))
-```
+    ``` r
+    typ <- levels(marks(X))
+    ```
 
-1.  Plot the bivariate *K* functions.
+3.  Plot the bivariate *K* functions.
 
     1.  Does it appear that cells of the same type interact? If so, guess at a suitable interaction distance.
     2.  Does it appear that cells of different types interact? If so, guess at a suitable interaction distance.
 
-``` r
-plot(alltypes(X, Kcross))
-```
+    ``` r
+    plot(alltypes(X, Kcross))
+    ```
 
-![](solution11_files/figure-markdown_github/unnamed-chunk-13-1.png)
+    ![](solution11_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
-Yes, points of same type appear to be interacting at e.g. 60 microns.
+    Yes, points of same type appear to be interacting at e.g. 60 microns.
 
-No, points of opposite types do not appear to interact (or if they do it is only at quite short distances).
+    No, points of opposite types do not appear to interact (or if they do it is only at quite short distances).
 
-1.  Fit a multitype Strauss model using the selected interactions. For example if your answer to question *i* was “yes, at 20 microns” and your answer to question *ii* was “yes, at 30 microns”,
+4.  Fit a multitype Strauss model using the selected interactions. For example if your answer to question *i* was “yes, at 20 microns” and your answer to question *ii* was “yes, at 30 microns”,
 
     ``` r
     rad <- matrix(c(20,30,30,20), 2, 2)
@@ -168,15 +164,15 @@ No, points of opposite types do not appear to interact (or if they do it is only
 
     Interpret the fitted model. Plot the array of fitted pairwise interactions using `plot(fitin(fit))` where `fit` is the fitted model. What is the fitted strength of the interaction?
 
-``` r
-plot(fitin(fit))
-```
+    ``` r
+    plot(fitin(fit))
+    ```
 
-![](solution11_files/figure-markdown_github/unnamed-chunk-17-1.png)
+    ![](solution11_files/figure-markdown_github/unnamed-chunk-17-1.png)
 
-The fitted interaction is very strong for same type cells (and absent for opposite types).
+    The fitted interaction is very strong for same type cells (and absent for opposite types).
 
-1.  For comparison purposes, fit the following models, interpret them, and compare the results:
+5.  For comparison purposes, fit the following models, interpret them, and compare the results:
 
     ``` r
     fitU <- ppm(X ~ marks, Strauss(60))
@@ -204,20 +200,20 @@ Here we will use profile pseudolikelihood to estimate the interaction distances 
 
     Try typing `MS(50)` to check that this is what you expect.
 
-``` r
-MS(50)
-```
+    ``` r
+    MS(50)
+    ```
 
-    ## Pairwise interaction family
-    ## Interaction:Multitype Strauss process
-    ## 2 types of points
-    ## Possible types:   not yet determined
-    ## Interaction radii:
-    ##      [,1] [,2]
-    ## [1,]   50   NA
-    ## [2,]   NA   50
+        ## Pairwise interaction family
+        ## Interaction:Multitype Strauss process
+        ## 2 types of points
+        ## Possible types:   not yet determined
+        ## Interaction radii:
+        ##      [,1] [,2]
+        ## [1,]   50   NA
+        ## [2,]   NA   50
 
-1.  Then we can use maximum profile pseudolikelihood:
+3.  Then we can use maximum profile pseudolikelihood:
 
     ``` r
     profilepl(rval, MS, X ~ marks)

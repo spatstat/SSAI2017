@@ -14,29 +14,29 @@ For the `swedishpines` data:
 
 1.  Calculate the estimate of the nearest neighbour distance distribution function *G* using `Gest`.
 
-``` r
-G <- Gest(swedishpines)
-```
+    ``` r
+    G <- Gest(swedishpines)
+    ```
 
-1.  Plot the estimate of *G*(*r*) against *r*
+2.  Plot the estimate of *G*(*r*) against *r*
 
-``` r
-plot(G, cbind(km, rs, han) ~ r, main = "Nearest neighbor distance distribution")
-```
+    ``` r
+    plot(G, cbind(km, rs, han) ~ r, main = "Nearest neighbor distance distribution")
+    ```
 
-![](solution08_files/figure-markdown_github/unnamed-chunk-4-1.png)
+    ![](solution08_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
-1.  Plot the estimate of *G*(*r*) against the theoretical (Poisson) value *G*<sub>pois</sub>(*r*)=1 − exp(−*λ**π**r*<sup>2</sup>).
+3.  Plot the estimate of *G*(*r*) against the theoretical (Poisson) value *G*<sub>pois</sub>(*r*)=1 − exp(−*λ**π**r*<sup>2</sup>).
 
-E.g.
+    E.g.
 
-``` r
-plot(G, . ~ theo, main = "Nearest neighbor distribution")
-```
+    ``` r
+    plot(G, . ~ theo, main = "Nearest neighbor distribution")
+    ```
 
-![](solution08_files/figure-markdown_github/unnamed-chunk-5-1.png)
+    ![](solution08_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
-1.  Define Fisher’s variance-stabilising transformation for c.d.f.’s by
+4.  Define Fisher’s variance-stabilising transformation for c.d.f.’s by
 
     ``` r
     Phi <- function(x) asin(sqrt(x))
@@ -44,14 +44,14 @@ plot(G, . ~ theo, main = "Nearest neighbor distribution")
 
     Plot the *G* function using the formula `Phi(.) ~ Phi(theo)` and interpret it.
 
-``` r
-Phi <- function(x) asin(sqrt(x))
-plot(G, Phi(.) ~ Phi(theo), main = "Nearest neighbor distribution")
-```
+    ``` r
+    Phi <- function(x) asin(sqrt(x))
+    plot(G, Phi(.) ~ Phi(theo), main = "Nearest neighbor distribution")
+    ```
 
-![](solution08_files/figure-markdown_github/unnamed-chunk-7-1.png)
+    ![](solution08_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
-The transformation has made the deviations from CSR in the central part of the curve smaller. We need envelopes to say anything about significance.
+    The transformation has made the deviations from CSR in the central part of the curve smaller. We need envelopes to say anything about significance.
 
 ### Exercise 2
 
@@ -59,27 +59,27 @@ For the `swedishpines` data:
 
 1.  Calculate the estimate of the nearest neighbour distance distribution function *F* using `Fest`.
 
-``` r
-Fhat <- Fest(swedishpines)
-```
+    ``` r
+    Fhat <- Fest(swedishpines)
+    ```
 
-1.  Plot the estimate of *F*(*r*) against *r*
+2.  Plot the estimate of *F*(*r*) against *r*
 
-``` r
-plot(Fhat, main = "Empty Space function")
-```
+    ``` r
+    plot(Fhat, main = "Empty Space function")
+    ```
 
-![](solution08_files/figure-markdown_github/unnamed-chunk-9-1.png)
+    ![](solution08_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
-1.  Plot the estimate of *F*(*r*) against the theoretical (Poisson) value *F*<sub>pois</sub>(*r*)=1 − exp(−*λ**π**r*<sup>2</sup>).
+3.  Plot the estimate of *F*(*r*) against the theoretical (Poisson) value *F*<sub>pois</sub>(*r*)=1 − exp(−*λ**π**r*<sup>2</sup>).
 
-``` r
-plot(Fhat, . ~ theo, main = "")
-```
+    ``` r
+    plot(Fhat, . ~ theo, main = "")
+    ```
 
-![](solution08_files/figure-markdown_github/unnamed-chunk-10-1.png)
+    ![](solution08_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
-1.  Define Fisher’s variance-stabilising transformation for c.d.f.’s by
+4.  Define Fisher’s variance-stabilising transformation for c.d.f.’s by
 
     ``` r
     Phi <- function(x) asin(sqrt(x))
@@ -87,11 +87,11 @@ plot(Fhat, . ~ theo, main = "")
 
     Plot the *F* function using the formula `Phi(.) ~ Phi(theo)` and interpret it.
 
-``` r
-Phi <- function(x) asin(sqrt(x))
-plot(Fhat, Phi(.) ~ Phi(theo), main = "")
-```
+    ``` r
+    Phi <- function(x) asin(sqrt(x))
+    plot(Fhat, Phi(.) ~ Phi(theo), main = "")
+    ```
 
-![](solution08_files/figure-markdown_github/unnamed-chunk-12-1.png)
+    ![](solution08_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
-The transformation has changed the picture much. It looks like deviation from CSR, but again, without envelopes it's hard to draw conclusions.
+    The transformation has changed the picture much. It looks like deviation from CSR, but again, without envelopes it's hard to draw conclusions.

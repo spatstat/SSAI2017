@@ -24,26 +24,26 @@ the `swedishpines` data.
     plot the $L$-function of the dataset and choose the value $r$
     which maximises the discrepancy $|L(r)-r|$.
 
-We plot the above function which we want to maximize.
+    We plot the above function which we want to maximize.
 
-```{r}
-plot(Lest(swedishpines), abs(iso - r) ~ r, main = "")
-```
+    ```{r}
+    plot(Lest(swedishpines), abs(iso - r) ~ r, main = "")
+    ```
 
-As seen from the plot, the maximum lies around $r = 6.5$ by eye.
-We find the optimum explicitly like follows:
+    As seen from the plot, the maximum lies around $r = 6.5$ by eye.
+    We find the optimum explicitly like follows:
 
-```{r}
-discrep <- function(r) {
-  return(abs(as.function(Lest(swedishpines))(r) - r))
-}
-res <- optimise(discrep, interval = c(0.1, 20), maximum = TRUE)
-print(res)
-R <- res$maximum
-```
-
-This corresponds nicely with the plot.
-
+    ```{r}
+    discrep <- function(r) {
+      return(abs(as.function(Lest(swedishpines))(r) - r))
+    }
+    res <- optimise(discrep, interval = c(0.1, 20), maximum = TRUE)
+    print(res)
+    R <- res$maximum
+    ```
+    
+    This corresponds nicely with the plot.
+    
 2.  Fit the stationary Strauss model with the chosen interaction
     distance using
     ```{r, eval = FALSE}
@@ -51,27 +51,28 @@ This corresponds nicely with the plot.
     ```
     where `R` is your chosen value.
 
-    3.  Interpret the printout: how strong is the interaction?
+3.  Interpret the printout: how strong is the interaction?
 
-    4.  Plot the fitted pairwise interaction function using
-        `plot(fitin(fit))`.
+4.  Plot the fitted pairwise interaction function using
+    `plot(fitin(fit))`.
 
-As we have assigned `R`, we simply write:
+    As we have assigned `R`, we simply write:
+    
+    ```{r}
+    fit <- ppm(swedishpines ~ 1, Strauss(R))
+    print(fit)
+    ```
 
-```{r}
-fit <- ppm(swedishpines ~ 1, Strauss(R))
-print(fit)
-```
+    As seen, the $\gamma = 0.14$ parameter is quite small. Thus there seems to be a
+    strong negative association between points within distance R of each other.
+    A $\gamma$ of $0$ implies the hard core process whereas $\gamma = 1$ implies
+    the Poisson process and thus CSR.
 
-As seen, the $\gamma = 0.14$ parameter is quite small. Thus there seems to be a
-strong negative association between points within distance R of each other.
-A $\gamma$ of $0$ implies the hard core process whereas $\gamma = 1$ implies the Poisson process and thus CSR.
-
-The pairwise interaction function become:
-
-```{r}
-plot(fitin(fit))
-```
+    The pairwise interaction function become:
+    
+    ```{r}
+    plot(fitin(fit))
+    ```
 
 ### Exercise 2
 
@@ -83,11 +84,11 @@ profile pseudolikelihood.
     `swedishpines` and determine a plausible range of
     possible values for the interaction distance.
     
-```{r}
-plot(Lest(swedishpines), main = "")
-```
+    ```{r}
+    plot(Lest(swedishpines), main = "")
+    ```
 
-A conservative range of plausible interaction distances seems to be 3 to 15 meters.
+    A conservative range of plausible interaction distances seems to be 3 to 15 meters.
 
 2.  Generate a sequence of values equally spaced across this range,
     for example, if your range of plausible values was
@@ -96,10 +97,10 @@ A conservative range of plausible interaction distances seems to be 3 to 15 mete
     rvals <- seq(0.05, 0.3, by=0.01)
     ```
 
-We generate the numbers between 3 and 12.
-```{r}
-rvals <- seq(3, 12, by = 0.1)
-```
+    We generate the numbers between 3 and 12.
+    ```{r}
+    rvals <- seq(3, 12, by = 0.1)
+    ```
 
 3.  Construct a data frame, with one column named `r`
     (matching the argument name of `Strauss`), containing
@@ -108,11 +109,11 @@ rvals <- seq(3, 12, by = 0.1)
     D <- data.frame(r = rvals)
     ```
 
-OK, 
-
-```{r}
-D <- data.frame(r = rvals)
-```
+    OK, 
+    
+    ```{r}
+    D <- data.frame(r = rvals)
+    ```
 
 
 4.  Execute
@@ -121,28 +122,28 @@ D <- data.frame(r = rvals)
     ```
     to find the maximum profile pseudolikelihood fit.
 
-OK, let's execute it: 
-
-```{r}
-fitp <- profilepl(D, Strauss, swedishpines ~ 1)
-```
+    OK, let's execute it: 
+    
+    ```{r}
+    fitp <- profilepl(D, Strauss, swedishpines ~ 1)
+    ```
 
 5.  Print and plot the object `fitp`.
 
-```{r}
-print(fitp)
-plot(fitp)
-```
+    ```{r}
+    print(fitp)
+    plot(fitp)
+    ```
 
 6.  Compare the computed estimate of interaction distance $r$ with
     your guesstimate. Compare the corresponding estimates of the
     Strauss interaction parameter $\gamma$.
     
-```{r}
-(Ropt <- reach(as.ppm(fitp)))
-```
+    ```{r}
+    (Ropt <- reach(as.ppm(fitp)))
+    ```
 
-The $r = `r Ropt`$ is not totally inconsistent with the previous estimate of $7$.
+    The $r = `r Ropt`$ is not totally inconsistent with the previous estimate of $7$.
 
 7.  Extract the fitted Gibbs point process model from the object
     `fitp` as 
@@ -150,11 +151,11 @@ The $r = `r Ropt`$ is not totally inconsistent with the previous estimate of $7$
     bestfit <- as.ppm(fitp)
     ```
 
-OK, let's do that:
+    OK, let's do that:
 
-```{r}
-bestfit <- as.ppm(fitp)
-```
+    ```{r}
+    bestfit <- as.ppm(fitp)
+    ```
 
 ### Exercise 3
 
@@ -163,17 +164,17 @@ For the Strauss model fitted in Question 1,
 1.  Generate and plot a simulated realisation of the fitted model
     using `simulate`.
 
-```{r}
-s <- simulate(fit, drop = TRUE)
-plot(s, main = "")
-```
+    ```{r}
+    s <- simulate(fit, drop = TRUE)
+    plot(s, main = "")
+    ```
 
 2.  Plot the $L$-function of the data along with the global
     simulation envelopes from 19 realisations of the fitted model.
 
-```{r}
-plot(envelope(fit, Lest, global = TRUE, nsim = 19, nsim2 = 100), main = "")
-```
+    ```{r}
+    plot(envelope(fit, Lest, global = TRUE, nsim = 19, nsim2 = 100), main = "")
+    ```
 
 
 
@@ -181,31 +182,31 @@ plot(envelope(fit, Lest, global = TRUE, nsim = 19, nsim2 = 100), main = "")
 
 1.  Read the help file for `Geyer`.
 
-See `help(Geyer)`
+    See `help(Geyer)`
 
 2.  Fit a stationary Geyer saturation process to `swedishpines`, with the 
     same interaction distance as for the Strauss model computed in Question 2,
     and trying different values of the saturation parameter `sat = 1, 2, 3` say.
 
-```{r}
-ppm(swedishpines ~ 1, Geyer(r = Ropt, sat = 1))
-ppm(swedishpines ~ 1, Geyer(r = Ropt, sat = 2))
-ppm(swedishpines ~ 1, Geyer(r = Ropt, sat = 3))
-```
+    ```{r}
+    ppm(swedishpines ~ 1, Geyer(r = Ropt, sat = 1))
+    ppm(swedishpines ~ 1, Geyer(r = Ropt, sat = 2))
+    ppm(swedishpines ~ 1, Geyer(r = Ropt, sat = 3))
+    ```
 
 3.  Fit the same model with the addition of a log-quadratic trend.
 
-```{r}
-gfit <- ppm(swedishpines ~ polynom(x, y, 2), Geyer(r = Ropt, sat = 3))
-```
+    ```{r}
+    gfit <- ppm(swedishpines ~ polynom(x, y, 2), Geyer(r = Ropt, sat = 3))
+    ```
 
 4.  Plot the fitted trend and conditional intensity.
 
-Here we use the log scale to be able to see the discs in the conditional intensity.
-```{r}
-par(mfrow=c(1,2))
-plot(gfit, log = TRUE, pause = FALSE)
-```
+    Here we use the log scale to be able to see the discs in the conditional intensity.
+    ```{r}
+    par(mfrow=c(1,2))
+    plot(gfit, log = TRUE, pause = FALSE)
+    ```
 
 
 ### Exercise 5

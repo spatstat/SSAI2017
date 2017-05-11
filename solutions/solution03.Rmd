@@ -25,41 +25,41 @@ covariate information in a list `bei.extra`.
     elev <- bei.extra$elev
     ```
 
-OK, lets do that:
-
-```{r}
-elev <- bei.extra$elev
-```
+    OK, lets do that:
+    
+    ```{r}
+    elev <- bei.extra$elev
+    ```
 
 2.  Plot the trees on top of an image of the elevation covariate.
-
-```{r}
-plot(elev, main = "")
-plot(bei, add = TRUE, cex = 0.3, pch = 16, cols = "white")
-```
+    
+    ```{r}
+    plot(elev, main = "")
+    plot(bei, add = TRUE, cex = 0.3, pch = 16, cols = "white")
+    ```
 
 3.  Cut the study region into 4 areas according to the value of the 
     terrain elevation, and make a texture plot of the result.
-    
-```{r}
-Z <- cut(elev, 4, labels=c("Low", "Med-Low", "Med-High", "High"))
-textureplot(Z, main = "")
-```
+        
+    ```{r}
+    Z <- cut(elev, 4, labels=c("Low", "Med-Low", "Med-High", "High"))
+    textureplot(Z, main = "")
+    ```
 
 4.	Convert the image from above to a tesselation, count the number 
     of points in each region using `quadratcount`, and plot the
     quadrat counts.
     
-```{r}
-Y <- tess(image = Z)
-qc <- quadratcount(bei, tess = Y)
-```
+    ```{r}
+    Y <- tess(image = Z)
+    qc <- quadratcount(bei, tess = Y)
+    ```
 
 5.  Estimate the intensity in each of the four regions.
-
-```{r}
-intensity(qc)
-```
+    
+    ```{r}
+    intensity(qc)
+    ```
 
 
 ### Exercise 2
@@ -73,33 +73,34 @@ where $e(u)$ is the terrain elevation at location u.
     plot(rh)
     ```
 
-Repeating the R code:
-
-```{r}
-rh <- rhohat(bei, elev)
-plot(rh)
-```
+    Repeating the R code:
+    
+    ```{r}
+    rh <- rhohat(bei, elev)
+    plot(rh)
+    ```
 
 2.	Compute the predicted intensity based on this estimate of $\rho$.
-
-```{r}
-prh <- predict(rh)
-plot(prh, main = "")
-plot(bei, add = TRUE, cols = "white", cex = .2, pch = 16)
-```
+    
+    ```{r}
+    prh <- predict(rh)
+    plot(prh, main = "")
+    plot(bei, add = TRUE, cols = "white", cex = .2, pch = 16)
+    ```
 
 3.  Compute a non-parametric estimate by kernel smoothing and
   	compare with the predicted intensity above.
 
-The kernel density estimate of the points is computed and plotted with the following code:
-
-```{r}
-dbei <- density(bei, sigma = bw.scott)
-plot(dbei, main = "")
-plot(bei, add = TRUE, cols = "white", cex = .2, pch = 16)
-```
-
-Which seems to be quite different form the predicted intentisty.
+    The kernel density estimate of the points is computed and plotted with the
+    following code:
+    
+    ```{r}
+    dbei <- density(bei, sigma = bw.scott)
+    plot(dbei, main = "")
+    plot(bei, add = TRUE, cols = "white", cex = .2, pch = 16)
+    ```
+    
+    Which seems to be quite different form the predicted intentisty.
 
 4.  Bonus info: To plot the two intensity estimates next to each
   	other you collect the estimates as a spatial object list
@@ -111,11 +112,11 @@ Which seems to be quite different form the predicted intentisty.
          main.panel = c("rhohat prediction", "kernel smoothing"))
     ```
 
-```{r}
-l <- solist(prh, dbei)
-plot(l, equal.ribbon = TRUE, main = "",
-     main.panel = c("rhohat prediction", "kernel smoothing"))
-```
+    ```{r}
+    l <- solist(prh, dbei)
+    plot(l, equal.ribbon = TRUE, main = "",
+         main.panel = c("rhohat prediction", "kernel smoothing"))
+    ```
 
 
 ### Exercise 3
@@ -123,14 +124,14 @@ plot(l, equal.ribbon = TRUE, main = "",
 1.  Continuing with the dataset `bei` conduct both Berman's Z1 and Z2 tests for
     dependence on `elev`, and plot the results.
 
-The tests are done straightforwardly with `berman.test`:
-
-```{r}
-Z1 <- berman.test(bei, elev)
-print(Z1)
-plot(Z1)
-
-Z2 <- berman.test(bei, elev, which = "Z2")
-print(Z2)
-plot(Z2)
-```
+    The tests are done straightforwardly with `berman.test`:
+    
+    ```{r}
+    Z1 <- berman.test(bei, elev)
+    print(Z1)
+    plot(Z1)
+    
+    Z2 <- berman.test(bei, elev, which = "Z2")
+    print(Z2)
+    plot(Z2)
+    ```

@@ -33,7 +33,7 @@ two types (“on” and “off” detectors) in a layer of the retina.
 
 3.  What is the overall interpretation of these summary functions?
 
-Inhibition for types of same type. Independence between types.
+    Inhibition for types of same type. Independence between types.
 
 ### Exercise 2
 
@@ -53,7 +53,7 @@ Continuing with the `amacrine` data,
 
 3.  What is the overall interpretation of the $G$-functions?
 
-Same as before.
+    Same as before.
 
 ### Exercise 3
 
@@ -68,9 +68,9 @@ the Random Labelling Property.
     statistic. Compute this for the data using
     `Kcross(bramblecanes, "2", "0")` and plot it.
     
-```{r}
-plot(Kcross(bramblecanes, "2", "0"))
-```
+    ```{r}
+    plot(Kcross(bramblecanes, "2", "0"))
+    ```
 
 3.  Read the help for `Kcross`. Find the names of the
     second and third arguments to the function.
@@ -104,9 +104,9 @@ We want to fit a Gibbs process model to the `betacells` data.
 
 1.  Access the `betacells` data and plot the pattern.
 
-```{r}
-plot(betacells, main = "Beta cells")
-```
+    ```{r}
+    plot(betacells, main = "Beta cells")
+    ```
 
 
 2.  Save the data as a point pattern `X` and save only the mark `type`
@@ -116,11 +116,10 @@ plot(betacells, main = "Beta cells")
     ```
     
     Also we will save the two type names:
-    
 
-```{r}
-typ <- levels(marks(X))
-```
+    ```{r}
+    typ <- levels(marks(X))
+    ```
 
 3.  Plot the bivariate $K$ functions.
 
@@ -129,14 +128,14 @@ typ <- levels(marks(X))
     ii.  Does it appear that cells of different types interact?
         If so, guess at a suitable interaction distance.
 
-```{r}
-plot(alltypes(X, Kcross))
-```
-
-Yes, points of same type appear to be interacting at e.g. 60 microns.
-
-No, points of opposite types do not appear to interact (or if they do it is only
-at quite short distances).
+    ```{r}
+    plot(alltypes(X, Kcross))
+    ```
+    
+    Yes, points of same type appear to be interacting at e.g. 60 microns.
+    
+    No, points of opposite types do not appear to interact (or if they do it is only
+    at quite short distances).
 
 4.  Fit a multitype Strauss model using the selected interactions.
     For example if your answer to question *i* was “yes, at 20
@@ -164,12 +163,12 @@ at quite short distances).
     strength of the interaction?
     
     
-```{r}
-plot(fitin(fit))
-```
-
-The fitted interaction is very strong for same type cells (and absent for opposite
-types).
+    ```{r}
+    plot(fitin(fit))
+    ```
+    
+    The fitted interaction is very strong for same type cells (and absent for opposite
+    types).
 
 5.  For comparison purposes, fit the following models, interpret
     them, and compare the results:
@@ -202,9 +201,9 @@ distance $R$ which is the same for each type.
     ```
     Try typing `MS(50)` to check that this is what you expect.
 
-```{r}
-MS(50)
-```
+    ```{r}
+    MS(50)
+    ```
 
 3.  Then we can use maximum profile pseudolikelihood:
     ```{r}
