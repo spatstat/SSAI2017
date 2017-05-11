@@ -44,9 +44,9 @@ plot(swedishpines, main = "")
     plot(K, main = "K-function")
     ```
 
-3.  Plot the estimate of $K(r) - \pi r^2$ against $r$.
+3.  Plot the estimate of $K(r) - \pi\!r^2$ against $r$.
 
-    The estimated K-function subtracted $\pi r^2$ can be done via the `fmla`
+    The estimated K-function subtracted $\pi\!r^2$ can be done via the `fmla`
     (formula) interface:
 
     ```{r}

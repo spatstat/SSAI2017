@@ -10,19 +10,13 @@ The `swedishpines` dataset was recorded in a study plot in a large forest. We sh
 
 1.  Calculate the estimate of the *K*-function using `Kest`.
 
-2.  Plot
-    $$\\widehat K(r)$$
-     against *r*
+2.  Plot the estimate of *K*(*r*) against *r*
 
-3.  Plot
-    $$\\widehat K(r) - \\pi r^2$$
-     against *r*.
+3.  Plot the estimate of *K*(*r*)−*π*​*r*<sup>2</sup> against *r*.
 
 4.  Calculate the estimate of the *L*-function and plot it against *r*.
 
-5.  Plot
-    $$\\widehat L(r) - r$$
-     against *r*.
+5.  Plot the estimate of *L*(*r*)−*r* against *r*.
 
 6.  Calculate and plot an estimate of the pair correlation function using `pcf`.
 
